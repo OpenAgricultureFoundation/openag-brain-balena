@@ -3,7 +3,9 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-python:3.6.8-stretch-build
 # Install things we need to build here
 
 RUN apt-get update; \
-    apt-get install -y libffi-dev; \
+    apt-get install -y libffi-dev \
+                        build-dep \
+                        libfreetype6-dev; \
     rm -rf /var/lib/apt/lists/*
 
 ### Make the directory structure
@@ -25,7 +27,7 @@ RUN pip install -r requirements.txt; rm requirements.txt
 ### Copy OpenAg Brain
 ADD openag-device-software /opt/openagbrain
 COPY setup_django_db.sh .
-RUN setup_django_db.sh; rm setup_django_db.sh
+RUN ./setup_django_db.sh; rm setup_django_db.sh
 
 ### Expose port 80
 EXPOSE 80
