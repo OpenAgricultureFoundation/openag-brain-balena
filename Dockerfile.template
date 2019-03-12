@@ -1,0 +1,34 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-python:3.6.8-stretch-build
+
+# Install things we need to build here
+
+RUN apt-get update; \
+    apt-get install -y libffi-dev; \
+    rm -rf /var/lib/apt/lists/*
+
+### Make the directory structure
+#  We'll be placing everything at /opt/openagbrain
+# TODO: We'll need to move where the stored images are to the Balena specific /data
+
+RUN mkdir -p /opt/openagbrain/data/images/stored
+
+### Install python 3.6
+#  since the isntall scripts use sudo, and we don't need sudo, we'll alais it
+###### DON'T NEED SINCE WE'RE USING A PYTHON 3.6 image
+#COPY openag-device-software/scripts/install/install_python36.sh .
+#RUN alias sudo='';install_python36.sh;rm install_python36.sh
+
+### Install the various python modules
+COPY openag-device-software/requirements.txt .
+RUN pip install -r requirements.txt; rm requirements.txt
+
+### Copy OpenAg Brain
+ADD openag-device-software /opt/openagbrain
+COPY setup_django_db.sh .
+RUN setup_django_db.sh; rm setup_django_db.sh
+
+### Expose port 80
+EXPOSE 80
+WORKDIR /opt/openagbrain
+CMD ["python3.6", "manage.py", "runserver", "0.0.0.0:80"]
+
