@@ -1,0 +1,3 @@
+[submodule "openag-device-software"]
+	path = openag-device-software
+	url = https://github.com/OpenAgInitiative/openag-device-software.git
