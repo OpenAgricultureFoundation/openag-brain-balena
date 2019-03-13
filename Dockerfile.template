@@ -4,7 +4,15 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-python:3.6.8-stretch-build
 
 RUN apt-get update; \
     apt-get install -y libffi-dev \
-                        build-dep \
+                        libsdl-dev \
+                        libsdl-image1.2-dev \
+                        libsdl-mixer1.2-dev \
+                        libsdl-ttf2.0-dev \
+                        libsmpeg-dev \
+                        libportmidi-dev \
+                        libavformat-dev \
+                        libswscale-dev \
+                        libjpeg-dev \
                         libfreetype6-dev; \
     rm -rf /var/lib/apt/lists/*
 
@@ -27,10 +35,26 @@ RUN pip install -r requirements.txt; rm requirements.txt
 ### Copy OpenAg Brain
 ADD openag-device-software /opt/openagbrain
 COPY setup_django_db.sh .
-RUN ./setup_django_db.sh; rm setup_django_db.sh
+RUN chmod +x ./setup_django_db.sh; ./setup_django_db.sh; rm setup_django_db.sh
+
+WORKDIR /opt/openagbrain
+### Set up virtual env, activate it
+COPY create_venv.sh .
+RUN chmod +x ./create_venv.sh; ./create_venv.sh; rm ./create_venv.sh
+
+### set up some envs
+ENV PLATFORM=%%BALENA_MACHINE_NAME%%
+ENV PROJECT_ROOT=/opt/openagbrain
+
+COPY set_env_vars.sh /opt/openagbrain/set_env_vars.sh
+RUN chmod +x /opt/openagbrain/set_env_vars.sh
+### Add in the startup script (Used by ENTRYPOINT)
+COPY run_django.sh /opt/openagbrain/run_django.sh
+RUN chmod +x /opt/openagbrain/run_django.sh
+
 
 ### Expose port 80
 EXPOSE 80
-WORKDIR /opt/openagbrain
-CMD ["python3.6", "manage.py", "runserver", "0.0.0.0:80"]
+
+ENTRYPOINT ["/opt/openagbrain/run_django.sh"]
 
