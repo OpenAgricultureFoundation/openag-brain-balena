@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+
+echo "Setting up DB"
+${PROJECT_ROOT}/setup_django_db.sh
+
 ## IOT SETTINGS
 export IOT_PRIVATE_KEY=/data/registration/rsa_private.pem
 export CA_CERTS=/data/registration/roots.pem

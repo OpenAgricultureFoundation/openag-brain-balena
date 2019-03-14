@@ -34,10 +34,14 @@ RUN pip install -r requirements.txt; rm requirements.txt
 
 ### Copy OpenAg Brain
 ADD openag-device-software /opt/openagbrain
-COPY setup_django_db.sh .
-RUN chmod +x ./setup_django_db.sh; ./setup_django_db.sh; rm setup_django_db.sh
 
 WORKDIR /opt/openagbrain
+
+### We can't create the DB here, as the /data persistant storage area won't exist at this point
+###   BUT we can copy in the scfript here.
+COPY setup_django_db.sh /opt/openagbrain/setup_django_db.sh
+RUN chmod +x ./setup_django_db.sh
+
 ### Set up virtual env, activate it
 COPY create_venv.sh .
 RUN chmod +x ./create_venv.sh; ./create_venv.sh; rm ./create_venv.sh
