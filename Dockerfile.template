@@ -47,6 +47,7 @@ COPY create_venv.sh .
 RUN chmod +x ./create_venv.sh; ./create_venv.sh; rm ./create_venv.sh
 
 ### set up some envs
+ENV INITSYSTEM on
 ENV PLATFORM=%%BALENA_MACHINE_NAME%%
 ENV PROJECT_ROOT=/opt/openagbrain
 
