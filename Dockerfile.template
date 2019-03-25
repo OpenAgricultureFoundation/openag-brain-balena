@@ -2,8 +2,8 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-python:3.6.8-stretch-build
 
 # Install things we need to build here
 
-RUN apt-get update; \
-    apt-get install -y libffi-dev \
+RUN apt-get update  \
+    && apt-get install -y libffi-dev \
                         libsdl-dev \
                         libsdl-image1.2-dev \
                         libsdl-mixer1.2-dev \
@@ -13,8 +13,14 @@ RUN apt-get update; \
                         libavformat-dev \
                         libswscale-dev \
                         libjpeg-dev \
-                        libfreetype6-dev; \
-    rm -rf /var/lib/apt/lists/*
+                        libfreetype6-dev \
+                        dnsmasq \
+                        wireless-tools  \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+### Install Balena.io wifi-connect
+
 
 ### Make the directory structure
 #  We'll be placing everything at /opt/openagbrain
@@ -31,6 +37,14 @@ RUN mkdir -p /opt/openagbrain/data/images/stored
 ### Install the various python modules
 COPY openag-device-software/requirements.txt .
 RUN pip install -r requirements.txt; rm requirements.txt
+
+### Setup balean wifi-connect:
+WORKDIR /usr/src/app
+
+RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/latest -s \
+    | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
+    | xargs -n1 curl -Ls \
+    | tar -xvz -C /usr/src/app/
 
 ### Copy OpenAg Brain
 ADD openag-device-software /opt/openagbrain

@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+if [ ! -f /data/network.configured ]; then
+    echo "Setting up wifi connection. Connect to the OpenAgPFC access point"
+    cd /usr/src/app
+    ./wifi-connect -s PFC-${RESIN_DEVICE_NAME_AT_INIT}
+    echo "Wifi Configured"
+    touch /data/network.configured
+fi
 
 echo "Setting up DB"
 ${PROJECT_ROOT}/setup_django_db.sh
