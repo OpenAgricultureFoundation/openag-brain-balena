@@ -3,7 +3,7 @@
 cd /opt/openagbrain
 
 # Make sure the directory for the database is created
-mkdir -p ${STORAGE_LOCATION:-data}/db
+mkdir -p ${STORAGE_LOCATION:data}/db
 
 # Migrate/Create DB
 python3.6 manage.py migrate
