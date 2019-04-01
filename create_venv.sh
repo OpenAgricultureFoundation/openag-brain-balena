@@ -7,4 +7,8 @@ echo "Current Python: "
 echo `which python3.6`
 
 pip3.6 install -r /opt/openagbrain/requirements.txt
+
+echo "Collect static files"
+python3.6 manage.py collectstatic --clear --link --noinput
+
 deactivate

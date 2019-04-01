@@ -10,6 +10,8 @@ if [[ ! -f /data/network.configured ]]; then
     touch /data/network.configured
 fi
 
+cd ${PROJECT_ROOT}
+
 echo "Setting up DB"
 ${PROJECT_ROOT}/setup_django_db.sh
 
@@ -24,6 +26,9 @@ export RUNTIME_MODE="DEVELOPMENT"
 # export LOG_LEVEL="DEBUG"
 
 source ${PROJECT_ROOT}/venv/bin/activate
+
+# re-pip install just in case something didn't get built in Docker (e.g. picamera requires being built on a pi)
+pip install -r requirements.txt
 
 echo "Setting ENV vars"
 source ${PROJECT_ROOT}/set_env_vars.sh
