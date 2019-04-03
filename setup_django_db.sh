@@ -2,7 +2,9 @@
 
 cd /opt/openagbrain
 
-DB_LOCATION = ${STORAGE_LOCATION:data}/db
+DB_LOCATION="${STORAGE_LOCATION:-data}/db"
+
+echo "DB LOCATION: ${DB_LOCATION}"
 
 if [[ ! -d "${DB_LOCATION}" ]]; then
     echo "Running First Time DB Setup"
@@ -21,5 +23,5 @@ if [[ ! -d "${DB_LOCATION}" ]]; then
 
 else
     # We should run the migrate anyway, just in case data model has changed.
-    python3.6 manage.py.migrate
+    python3.6 manage.py migrate
 fi
