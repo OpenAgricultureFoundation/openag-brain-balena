@@ -61,9 +61,14 @@ COPY create_venv.sh .
 RUN chmod +x ./create_venv.sh; ./create_venv.sh; rm ./create_venv.sh
 
 ### set up some envs
-ENV INITSYSTEM on
-ENV PLATFORM=%%BALENA_MACHINE_NAME%%
-ENV PROJECT_ROOT=/opt/openagbrain
+ENV PLATFORM %%BALENA_MACHINE_NAME%%
+ENV PROJECT_ROOT /opt/openagbrain
+
+### Balena Specific ENVs
+ENV INITSYSTEM=on \
+    DBUS_SYSTEM_BUS_ADDRESS="unix:path=/host/run/dbus/system_bus_socket" \
+    STORAGE_LOCATION="/data" \
+    UDEV=on
 
 COPY set_env_vars.sh /opt/openagbrain/set_env_vars.sh
 RUN chmod +x /opt/openagbrain/set_env_vars.sh
