@@ -3,6 +3,7 @@ PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [[ ! -f /data/network.configured ]]; then
     export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+    python scripts/network/clear_network_configs.py
     echo "Setting up wifi connection. Connect to the OpenAgPFC access point"
     cd /usr/src/app
     ./wifi-connect -s PFC-${RESIN_DEVICE_NAME_AT_INIT}

@@ -76,6 +76,8 @@ RUN chmod +x /opt/openagbrain/set_env_vars.sh
 COPY run_django.sh /opt/openagbrain/run_django.sh
 RUN chmod +x /opt/openagbrain/run_django.sh
 
+COPY clear_network_configs.py scripts/network/clear_network_configs.py
+
 
 ### Expose port 80
 EXPOSE 80
