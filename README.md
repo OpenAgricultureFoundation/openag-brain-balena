@@ -25,15 +25,16 @@ balena push <app name>
 
 # Docs
 balena.io/docs
-
-look up local-mode:
-https://www.balena.io/docs/learn/develop/local-mode/#ssh-into-the-running-app-container-or-host-os
-
 look up supervisor API
 
-# Connect to your Host OS or docker image running on your balena cloud device
-balena ssh
-balena local ssh 
+# SSH to your Host OS or docker image running on your balena cloud device
+https://www.balena.io/docs/learn/develop/local-mode/#ssh-into-the-running-app-container-or-host-os
+1. In the balena cloud page, navigate to your device.
+2. In the button bar there is a drop list (to the right of reboot, restart, blink).
+3. In the drop list, chose "enable local mode" and the device will reconfigure itself.
+4. `sudo balena local scan`
+5. From the output pick out the <short UUID>.local hostname.
+6. `sudo balena local ssh f0b4960.local`  will give you the choice of app or host.
 
 # Access the docker image permanent file system
 The app file system (in docker image) is in this dir if you are in the supervisor (Host OS):
