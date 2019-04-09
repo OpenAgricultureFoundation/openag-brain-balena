@@ -39,4 +39,12 @@ balena local ssh
 The app file system (in docker image) is in this dir if you are in the supervisor (Host OS):
 `/mnt/data/docker/volumes/XXXXXXX_resin-data/_data`
 
+# Connecting to the RPi console from OSX
+Buy: 
+- https://www.adafruit.com/product/954
+Install: 
+- https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/software-installation-mac
+Run:
+- `screen /dev/cu.usbserial 115200`
+
 
