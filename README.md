@@ -25,7 +25,8 @@ balena push <app name>
 ```
 
 # Docs
-balena.io/docs
+https://www.balena.io/docs/
+https://www.balena.io/docs/reference/cli/
 look up supervisor API
 
 # SSH to your Host OS or docker image running on your balena cloud device
