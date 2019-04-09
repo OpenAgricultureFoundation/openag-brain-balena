@@ -20,6 +20,7 @@ Then build a test application, download the image, flash a device.
 # Push an application to your device on the balena cloud
 ```bash
 cd ~/openag-brain-balena
+balena login
 balena push <app name>
 ```
 
