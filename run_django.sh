@@ -23,6 +23,8 @@ export GCLOUD_PROJECT=openag-v1
 export GCLOUD_REGION=us-central1
 export GCLOUD_DEV_REG=device-registry
 
+export REMOTE_DEVICE_UI_URL="https://${BALENA_DEVICE_UUID}.balena-devices.com"
+
 export RUNTIME_MODE="DEVELOPMENT"
 # export LOG_LEVEL="DEBUG"
 
