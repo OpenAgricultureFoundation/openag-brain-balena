@@ -21,7 +21,7 @@ Then build a test application, download the image, flash a device.
 ```bash
 cd ~/openag-brain-balena
 balena login
-balena push <app name>
+balena push <app name - rob you used 'test'>
 ```
 
 # Docs
