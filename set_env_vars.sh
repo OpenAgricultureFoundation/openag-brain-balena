@@ -17,7 +17,7 @@ DEFAULT_I2C_BUS=none
 DEFAULT_MUX_ADDRESS=0x77
 
 # This matches all raspberry pis
-if [[ ($PLATFORM == "raspberry-pi"*) || ($PLATFORM == "raspberrypi"*) ]]; then
+if [[ ($PLATFORM == "raspberry-pi"*) || ($PLATFORM == "raspberrypi"*) || ($PLATFORM == "fin"*) ]]; then
   IS_WIFI_ENABLED=true
   IS_I2C_ENABLED=true
   DEFAULT_I2C_BUS=1

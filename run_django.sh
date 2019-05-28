@@ -1,15 +1,25 @@
 #!/usr/bin/env bash
 PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+echo 0 > /sys/class/leds/pca963x\:red/brightness
+echo 0 > /sys/class/leds/pca963x\:green/brightness
+echo 0 > /sys/class/leds/pca963x\:blue/brightness
 
 if [[ ! -f /data/network.configured ]]; then
+    echo 50 > /sys/class/leds/pca963x\:red/brightness
     export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
-    python scripts/network/clear_network_configs.py
-    echo "Setting up wifi connection. Connect to the OpenAgPFC access point"
-    cd /usr/src/app
-    ./wifi-connect -s PFC-${RESIN_DEVICE_NAME_AT_INIT}
+#    python scripts/network/clear_network_configs.py
+    echo "Setting up wifi connection. Connect to the PFC_EDU-${RESIN_DEVICE_NAME_AT_INIT} access point"
+#    cd /usr/src/app
+#    ./wifi-connect -s PFC-${RESIN_DEVICE_NAME_AT_INIT}
+    cd /opt/python-wifi-connect
+    ./scripts/run.sh
+
     echo "Wifi Configured"
+    echo 50 > /sys/class/leds/pca963x\:blue/brightness
     touch /data/network.configured
 fi
+echo 0 > /sys/class/leds/pca963x\:red/brightness
+echo 50 > /sys/class/leds/pca963x\:blue/brightness
 
 cd ${PROJECT_ROOT}
 
@@ -38,4 +48,7 @@ source ${PROJECT_ROOT}/set_env_vars.sh
 
 # source ${PROJECT_ROOT}/scripts/install/activate.sh
 # busybox httpd -p 8088 -h ${PROJECT_ROOT}/data/images/
+echo 0 > /sys/class/leds/pca963x\:blue/brightness
+echo 25 > /sys/class/leds/pca963x\:green/brightness
+
 python3.6 manage.py runserver 0.0.0.0:80
