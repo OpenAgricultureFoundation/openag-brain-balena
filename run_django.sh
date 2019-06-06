@@ -51,4 +51,4 @@ source ${PROJECT_ROOT}/set_env_vars.sh
 echo 0 > /sys/class/leds/pca963x\:blue/brightness
 echo 25 > /sys/class/leds/pca963x\:green/brightness
 
-python3.6 manage.py runserver 0.0.0.0:80
+python3.6 manage.py runserver 0.0.0.0:80 & python3.6 scripts/platform/rpi_button_handler.py

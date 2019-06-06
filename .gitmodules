@@ -1,6 +1,6 @@
 [submodule "openag-device-software"]
 	path = openag-device-software
-	url = https://github.com/OpenAgInitiative/openag-device-software.git
+	url = https://github.com/OpenAgricultureFoundation/openag-device-software.git
 [submodule "python-wifi-connect"]
 	path = python-wifi-connect
 	url = https://github.com/OpenAgricultureFoundation/python-wifi-connect

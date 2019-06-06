@@ -15,3 +15,4 @@ jsonfield==2.0.2
 pyftdi==0.29.3
 python-networkmanager
 picamera
+RPi.GPIO
