@@ -40,5 +40,8 @@ source ${PROJECT_ROOT}/set_env_vars.sh
 
 # source ${PROJECT_ROOT}/scripts/install/activate.sh
 # busybox httpd -p 8088 -h ${PROJECT_ROOT}/data/images/
+if [[ ($DEBUGMODE == "true") ]]; then
+  /bin/bash
+fi
 
 python3.6 manage.py runserver 0.0.0.0:80 # & python3.6 scripts/platform/rpi_button_handler.py
