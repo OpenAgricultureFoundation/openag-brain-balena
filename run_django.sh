@@ -54,6 +54,7 @@ if [[ ($DEBUGMODE == "true") ]]; then
   /bin/bash
 fi
 
-python3.6 scripts/network/restart_mdns.py
+# Remove the restart_mdns for now since it doesn't always work fully
+# python3.6 scripts/network/restart_mdns.py
 
 python3.6 manage.py runserver 0.0.0.0:80 # & python3.6 scripts/platform/rpi_button_handler.py
