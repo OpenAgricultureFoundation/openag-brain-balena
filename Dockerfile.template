@@ -84,6 +84,9 @@ RUN chmod +x /opt/openagbrain/set_env_vars.sh
 COPY run_django.sh /opt/openagbrain/run_django.sh
 RUN chmod +x /opt/openagbrain/run_django.sh
 
+COPY mdns-service/stop_mdns.py scripts/network/stop_mdns.py
+COPY mdns-service/start_mdns.py scripts/network/start_mdns.py
+COPY mdns-service/restart_mdns.py scripts/network/restart_mdns.py
 COPY clear_network_configs.py scripts/network/clear_network_configs.py
 
 
