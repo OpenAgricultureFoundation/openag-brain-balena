@@ -60,7 +60,7 @@ WORKDIR /opt/openagbrain
 COPY requirements-balena.txt ./requirements.txt
 
 ### We can't create the DB here, as the /data persistant storage area won't exist at this point
-###   BUT we can copy in the scfript here.
+###   BUT we can copy in the script here.
 COPY setup_django_db.sh /opt/openagbrain/setup_django_db.sh
 RUN chmod +x ./setup_django_db.sh
 
