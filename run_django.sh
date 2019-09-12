@@ -14,7 +14,12 @@ if [[ ! -f /data/network.configured  && -f /data/system.configured ]]; then
     echo "Setting up wifi connection. Connect to the PFC-EDU-${RESIN_DEVICE_NAME_AT_INIT} access point"
     cd /opt/python-wifi-connect/src
     #./scripts/run.sh
-    python3.6 http_server.py -d > /data/logs/wifi-connect.txt
+
+    if [[ -f /data/registration/verification_code.txt ]]; then
+      python3.6 http_server.py -d -r `cat /data/registration/verification_code.txt`
+    else
+      python3.6 http_server.py -d
+    fi
 
     echo "Wifi Configured"
     touch /data/network.configured
