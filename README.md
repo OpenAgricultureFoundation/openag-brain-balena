@@ -1,3 +1,6 @@
+# Balena deployable OpenAg Brain
+This project links in the OpenAg brain software and makes it deployable utilizing [Balena.io](https://www.balena.io/) for easy management of devices.
+
 # How to pull all the code for this project
 There is a top level project with the balena / docker setup stuff and the brain is saved as a git 'submodule', which is just a tag of a repo at a certain point.
 ```bash
