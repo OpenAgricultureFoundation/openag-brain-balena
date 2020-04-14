@@ -1,4 +1,4 @@
-Django==1.11.20
+Django==1.11.28
 django-cors-headers==2.5.2
 djangorestframework==3.7.3
 jsonschema==2.6.0
