@@ -1,6 +1,6 @@
 Django==1.11.20
 django-cors-headers==2.5.2
-djangorestframework==3.7.3
+djangorestframework==3.11.2
 jsonschema==2.6.0
 numpy==1.15.0
 cryptography==2.4.1
